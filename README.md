@@ -79,3 +79,6 @@ Simple SQLite database is already created for persistency in the API. Users `"us
 | 2  | laundry   | 0         | user1  |
 | 3  | beer      | 1         | user2  |
 | 4  | homework  | 0         | user2  |
+
+
+Created with ♥️ by Jass

@@ -117,7 +117,7 @@ func (s *Server) EditTask(c *gin.Context) {
 	}
 
 	var UpdateTask models.Task
-	err = s.db.Where("ownwer = ?", username).First(&UpdateTask, id).Error
+	err = s.db.Where("owner = ?", username).First(&UpdateTask, id).Error
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "task can not be found"})
 		return
@@ -125,7 +125,7 @@ func (s *Server) EditTask(c *gin.Context) {
 
 	err = c.BindJSON(&UpdateTask)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "field to bind json"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "failed to bind json"})
 		return
 	}
 
@@ -156,9 +156,9 @@ func (s *Server) DeleleTaskID(c *gin.Context) {
 	}
 
 	var task models.Task
-	err = s.db.Where("ownwer = ?", username).Find(&task, id).Error
+	err = s.db.Where("owner = ?", username).Find(&task, id).Error
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "task ID not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "task can not be found"})
 		return
 	}
 

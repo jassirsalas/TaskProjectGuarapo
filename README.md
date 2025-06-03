@@ -6,7 +6,6 @@ A small and simple API for task management. Users can add, update, delete or rea
 - Add, delete, update, read tasks by user
 - Bearer Token authentication.
 
-
 ##  Requirements
 
 - Go 1.20+
@@ -29,6 +28,17 @@ A small and simple API for task management. Users can add, update, delete or rea
 | POST   | `/tasks`      | Create a new task              |
 | PUT    | `/tasks/:id`  | Update an existing task        |
 | DELETE | `/tasks/:id`  | Delete a task                  |
+
+## How to test
+Send a POST requets to the `/login` route for authentication. Example in the body add:
+```
+{
+  "username": "user1"
+}
+```
+"user1" can be change to any user you want, e.g., "user2"
+
+Once you're authenticated you can acces to the protected routes. Make GET request to `/tasks` to see all the tasks available for `user1`
 
 
 ## How to run

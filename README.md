@@ -88,7 +88,7 @@ Simple SQLite database is already created for persistency in the API. Users `"us
 | 1  | food      | 1         | user1  |
 | 2  | laundry   | 0         | user1  |
 | 3  | walking   | 1         | user2  |
-| 4  | homework  | 0         | user2  |
+| 4  | shop      | 0         | user2  |
 
 
 Created with ♥️ by Jass

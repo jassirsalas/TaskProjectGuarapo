@@ -156,9 +156,14 @@ func (s *Server) DeleleTaskID(c *gin.Context) {
 	}
 
 	var task models.Task
-	err = s.db.Where("owner = ?", username).Find(&task, id).Error
+	err = s.db.Find(&task, id).Error
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "task can not be found"})
+		return
+	}
+
+	if task.Owner != username {
+		c.JSON(http.StatusForbidden, gin.H{"error": "not authorized to delete this task"})
 		return
 	}
 
@@ -169,5 +174,5 @@ func (s *Server) DeleleTaskID(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusNoContent, nil)
+	c.Status(http.StatusNoContent)
 }

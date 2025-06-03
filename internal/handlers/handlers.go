@@ -75,6 +75,14 @@ func (s *Server) PostTask(c *gin.Context) {
 func (s *Server) GetTaskID(c *gin.Context) {
 	idStr := c.Param("id")
 
+	usernameGet, exists := c.Get("username")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "user unauthenticated"})
+		return
+	}
+
+	username := usernameGet.(string)
+
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid task ID format"})
@@ -82,9 +90,10 @@ func (s *Server) GetTaskID(c *gin.Context) {
 	}
 
 	var task models.Task
-	err = s.db.First(&task, id).Error
+
+	err = s.db.Where("owner = ?", username).First(&task, id).Error
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "task ID not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "task can not be found"})
 		return
 	}
 
